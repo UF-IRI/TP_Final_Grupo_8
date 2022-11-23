@@ -1,13 +1,13 @@
-# TP Final - Grupo `XX`
+# TP Final - Grupo `8`
 ### Consigna
     Consigna del TP Final
 ### Descripción
     Descripción del proyecto
 ### Integrantes
-- Integrante 1
-- Integrante 2
-- Integrante 3
-- Integrante 4
+- Almada Melody 
+- Corso Pilar
+- Fava Lara
+- Quiroga Luana
 ### Compilaciones
 [![Ubuntu](https://github.com/UF-IRI/TP_Final/actions/workflows/ubuntu.yml/badge.svg)](https://github.com/UF-IRI/TP_Final/actions/workflows/ubuntu.yml)
 ### Unit Tests
