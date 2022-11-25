@@ -1,5 +1,6 @@
 #include "funciones.h"
 #pragma once
+using namespace std;
 
 //funciones de agregar a un archivo
 void agregar_pacientes(Pacientes*& lista_pac, Pacientes paciente, int* tamactual) {
@@ -403,6 +404,7 @@ Medicos* Buscar_Medico_Nuevo(Medicos* Lista_Medicos, Consultas* lista_consultas,
 			if (ultima_consulta.matricula_med != Lista_Medicos[i].matricula && Lista_Medicos[i].activo == true && medico_ultima_consulta->especialidad == Lista_Medicos[i].especialidad) { //chequeamos solo si encuentra ==matricula, hay que ver del boolean agenda_llena
 				//si encuentra al medico que lo habia atendido antes y este se encuentra disponible, misma especialidad???
 				aux = &Lista_Medicos[i]; //encontramos al medico
+				return aux;
 			}
 		}
 		else
@@ -416,8 +418,114 @@ Medicos* Buscar_Medico_Nuevo(Medicos* Lista_Medicos, Consultas* lista_consultas,
 	return aux;//retornamos el struct del medico, significa que se puede asignar turno con el medico 
 }
 
-bool Asignar_Turno(Medicos* Lista_Medicos, Pacientes paciente_a_asignar_turno) {
-	cout << "El paciente desea asignar un turno con el medico que lo atendió en su ultima consulta?" << endl;
+bool Asignar_Medico(Medicos* Lista_Medicos,	Consultas* lista_cons, int* contador6, int* contador3) {
+
+	Medicos* medico_nueva_consulta;
+	Medicos* medico_nueva_consulta_nuevo;
+
+	cout << "Desea un turno con el medico de su ultima consulta?" << endl;
+	int respuesta1 = rand() % 2;
+	if (respuesta1 == 1) {
+		medico_nueva_consulta = Buscar_Medico_Viejo(Lista_Medicos, lista_cons, contador6, contador3);
+
+		if (medico_nueva_consulta != NULL) {
+			cout << "Encontramos al medico de su ultima consulta, sus datos son: " << endl;
+			cout << "Matricula: " << medico_nueva_consulta->matricula << " Apellido: " << medico_nueva_consulta->apellido << " Nombre: " << medico_nueva_consulta->nombre << " Especialidad: " << medico_nueva_consulta->especialidad << endl;
+		}
+		else {
+			cout << "No se ha encontrado al medico." << endl;
+			cout << "Desea buscar otro medico? " << endl;
+
+			int respuesta2 = rand() % 2;
+
+			if (respuesta2 == 1) {
+				cout << "Ha decidido buscar otro medico: " << endl;
+				medico_nueva_consulta_nuevo = Buscar_Medico_Nuevo(Lista_Medicos, lista_cons, contador6, contador3);
+
+				if (medico_nueva_consulta_nuevo != NULL) {
+					cout << "Encontramos un nuevo medico, sus datos son: " << endl;
+					cout << "Matricula: " << medico_nueva_consulta_nuevo->matricula << " Apellido: " << medico_nueva_consulta_nuevo->apellido << " Nombre: " << medico_nueva_consulta_nuevo->nombre << " Especialidad: " << medico_nueva_consulta_nuevo->especialidad << endl;
+				}
+				else
+					cout << "No se ha encontrado al medico nuevo." << endl;
+			}
+			else
+				cout << "El paciente ha decidido no buscar otro medido" << endl;
+		}
+	}
+	else {
+		cout << "Ha decidido no asignar turno con su ultimo medico, procedemos a buscar un nuevo. " << endl;
+
+		medico_nueva_consulta_nuevo = Buscar_Medico_Nuevo(Lista_Medicos, lista_cons, contador6, contador3);
+
+		if (medico_nueva_consulta_nuevo != NULL) {
+			cout << "Encontramos un nuevo medico, sus datos son: " << endl;
+			cout << "Matricula: " << medico_nueva_consulta_nuevo->matricula << " Apellido: " << medico_nueva_consulta_nuevo->apellido << " Nombre: " << medico_nueva_consulta_nuevo->nombre << " Especialidad: " << medico_nueva_consulta_nuevo->especialidad << endl;
+		}
+		else
+			cout << "No se ha encontrado al medico nuevo." << endl;
+	}
+}
+
+bool Verificar_Anio_Ultima_Consulta(tm* fecha_ultima_consulta) {
+
+	char s[100];
+	int rc;
+	time_t temp;
+	struct tm* timeptr;
+
+	temp = time(NULL);
+	timeptr = localtime(&temp);
+	rc = strftime(s, sizeof(s), "%d/%m/%Y", timeptr);
+	tm* aux2 = toInt(s);
+
+	cout << aux2->tm_mday << ", " << aux2->tm_mon << ", " << aux2->tm_year << endl;
+
+	time_t t = time(0);
+	tm* nuevo = localtime(&t);
+	nuevo->tm_year = (aux2->tm_year) - (fecha_ultima_consulta->tm_year);
+
+	cout << nuevo->tm_year << endl;
+
+	if (nuevo->tm_year < 10) {
+		return true;
+		//ok, la diferencia de año es menor a 10 o sea es un paciente recuperable, podemos llamar
+	}
+	else if (nuevo->tm_year == 10) { //la diferencia de año es 10, está al limite
+		if (fecha_ultima_consulta->tm_mon > aux2->tm_mon) { //vemos si el mes de la ultima consulta es mayor
+			return true;
+			//ok, el mes de la consulta es mayor, ej 11/2022-12/2012, significa que todavia no llegaron a ser 10 años 
+			//justos de su ultima consulta, por eso es un paciente recuperable, podemos llamarlo
+		}
+		else if (fecha_ultima_consulta->tm_mon == aux2->tm_mon) { //el mes es igua, está al limit
+			if (fecha_ultima_consulta->tm_mday >= aux2->tm_mday) {
+				return true;
+				//todavia no se cumplieron los 10 años o se cumplieron los 10 años justo ese dia
+				//pero es un paciente recuperable, podemos llamarlo
+			}
+			else//el dia de la ultima consulta es mas chico, se supero el limite
+				return false;
+			//ya se cumplieron los 10 años, es un paciente irrecuperable, procedemos a archivarlo
+
+		}
+		else if (fecha_ultima_consulta->tm_mon < aux2->tm_mon) {////el mes de ultima consulta es mas chico, supero limite
+			//ya se cumplieron los 10 años, es un paciente irrecuperable, procedemos a archivarlo
+			return false;
+		}
+	}
+	else //la diferencia de años es mayor a los 10, se supero el limite
+		return false; //ya se cumplieron los 10 años, es un paciente irrecuperable, procedemos a archivarlo
+
+
+
+}
+
+void Verificar_Datos_Paciente(Pacientes paciente_datos_verificar){
+	
+}
+
+/*
+* /*cout << "El paciente desea asignar un turno con el medico que lo atendió en su ultima consulta?" << endl;
 	int respuesta1 = rand() % 2;
 	if (respuesta1 == 1) {//true
 		cout << "El paciente quiere programar un turno con su antiguo medico. Procedemos a buscar al medico en la lista y verificar disponibilidad" << endl;
@@ -474,35 +582,33 @@ bool Asignar_Turno(Medicos* Lista_Medicos, Pacientes paciente_a_asignar_turno) {
 			//en este caso procedemos a dejar en standby y llamar en un tiempo, ofrecer otra cosa o archivamos directamente
 			return false;//turno no asignado
 		}
-	}
-
-}
+	}*/
 /*
-Medicos* Buscar_Medico_Nuevo(Medicos* Lista_Medicos, Pacientes paciente, int tam) {
+	Medicos* Buscar_Medico_Nuevo(Medicos* Lista_Medicos, Pacientes paciente, int tam) {
 
-	Medicos* aux=NULL;
-	for (int i = 0; i < tam; i++) {
-		int respuesta_agenda_llena = rand() % 2;
-		if (paciente.consulta.matricula_med != Lista_Medicos[i].matricula && Lista_Medicos[i].activo == true && respuesta_agenda_llena == false) { //chequeamos solo si encuentra ==matricula, hay que ver del boolean agenda_llena
-			//le asigna el primer medico activo y que no sea el que lo haya atendido antes, tambien que sea de la especialidad que busca
-			*aux = Lista_Medicos[i];
-		}//habria que ver porque deberia fijarse si el medico tiene agenda llena o algo asi, entonces recorre la lista y se fija de asignar turno con el primer medico que encuentre
-		else
-			return NULL;
-	}
-	return aux;//retornamos el medico
-}
-
-Medicos* Buscar_Medico_Viejo(Medicos* Lista_Medicos, Pacientes paciente, int tam) {
-
-	Medicos* aux=NULL;
-	for (int i = 0; i < tam; i++) {
-		if (paciente.consulta.matricula_med == Lista_Medicos[i].matricula && Lista_Medicos[i].activo == true) { //chequeamos solo si encuentra ==matricula, hay que ver del boolean agenda_llena
-			//si encuentra al medico que lo habia atendido antes y este se encuentra disponible, misma especialidad???
-			*aux = Lista_Medicos[i]; //encontramos al medico
+		Medicos* aux=NULL;
+		for (int i = 0; i < tam; i++) {
+			int respuesta_agenda_llena = rand() % 2;
+			if (paciente.consulta.matricula_med != Lista_Medicos[i].matricula && Lista_Medicos[i].activo == true && respuesta_agenda_llena == false) { //chequeamos solo si encuentra ==matricula, hay que ver del boolean agenda_llena
+				//le asigna el primer medico activo y que no sea el que lo haya atendido antes, tambien que sea de la especialidad que busca
+				*aux = Lista_Medicos[i];
+			}//habria que ver porque deberia fijarse si el medico tiene agenda llena o algo asi, entonces recorre la lista y se fija de asignar turno con el primer medico que encuentre
+			else
+				return NULL;
 		}
-		else
-			return NULL;
+		return aux;//retornamos el medico
 	}
-	return aux;//retornamos el struct del medico, significa que se puede asignar turno con el medico
-}*/
+
+	Medicos* Buscar_Medico_Viejo(Medicos* Lista_Medicos, Pacientes paciente, int tam) {
+
+		Medicos* aux=NULL;
+		for (int i = 0; i < tam; i++) {
+			if (paciente.consulta.matricula_med == Lista_Medicos[i].matricula && Lista_Medicos[i].activo == true) { //chequeamos solo si encuentra ==matricula, hay que ver del boolean agenda_llena
+				//si encuentra al medico que lo habia atendido antes y este se encuentra disponible, misma especialidad???
+				*aux = Lista_Medicos[i]; //encontramos al medico
+			}
+			else
+				return NULL;
+		}
+		return aux;//retornamos el struct del medico, significa que se puede asignar turno con el medico
+	}*/

@@ -15,8 +15,8 @@ typedef struct Pacientes {
 	string natalicio;
 	string estado;
 	string id_os;
-	Contactos contacto;//tendria que tener 2? uno de emergencia y otra dle mismo paciente
-	Contactos contacto_de_emergencia;
+	//Contactos contacto;//tendria que tener 2? uno de emergencia y otra dle mismo paciente
+	//Contactos contacto_de_emergencia;
 	//Consultas consulta;//consulta asociada, lee la del paciente
 
 }Pacientes;
@@ -69,8 +69,8 @@ Medicos* Buscar_Medico_Nuevo(Medicos* Lista_Medicos, Consultas* lista_consultas,
 // su agenda para un nuevo turno.
 // Habria que ver si usamos esta funcion dentro de asignar turno o viceversa.
 
-//terminar
-bool Asignar_Turno(Medicos* Lista_Medicos, Pacientes paciente_a_asignar_turno);
+//funciona
+bool Asignar_Medico(Medicos* Lista_Medicos, Consultas* lista_cons, int* contador6, int* contador3);
 // La idea de la funcion asignar_turno es que reciba al paciente que desea asignar turno, que busque 
 // al medico viejo o nuevo que tenga disponibilidad para asignarle su nueva consulta, una vez hecho 
 // eso, tendriamos que recorrer la lista de pacientes_agenda y guardar el turno.
@@ -81,13 +81,13 @@ void Llamar_Paciente(Pacientes* lista_pacientes, Consultas* lista_consultas, Con
 // si quiere nuevo turno para eso, llama a la funcion de asignar turno. Una vez asignado turno, 
 // deberiamos borrar al paciente de la lista general.
 
-//terminar
+//funciona
 void Verificar_Datos_Paciente(Pacientes paciente_datos_verificar);
 // Esta funcion deberia hacer el cuestionario de preguntas para ver si hubo 
 // cambios en datos de paciente, como numero de telefono, obra social, etc.
 
 //ya existe, mas abajo
-void Archivar_Paciente(Pacientes* lista_pac_total, Pacientes* lista_pac_archivados, Pacientes Paciente_a_Archivar);
+Pacientes* archivar_pacientes(Pacientes*& lista_pac_a_archivar, int* contador5);
 // Esta funcion es para los pacientes que se encuentran fallecidos o que ya 
 // no desean atenderse en nuetro centro medico. Eliminar de la anterior lista y agregar a la nueva de archivados?
 
@@ -141,3 +141,5 @@ Consultas* filtrar_lista_por_dni(Consultas* lista_consultas, Pacientes pac, int*
 tm* Encontrar_Consulta(Consultas* lista_consultas_filtradas, Pacientes pac, int* tamactual);
 
 Consultas encontrar_ultima_consulta(Consultas* lista_consultas_filtradas, int* tamactual);
+
+bool Verificar_Anio_Ultima_Consulta(tm* fecha_ultima_consulta);
