@@ -1,13 +1,8 @@
 # TP Final - Grupo `8`
 ### Consigna
-    El Hospital que nos contrata desea recuperar pacientes perdidos. Para eso, estudia las historias
-clínicas (ya digitalizadas) para descubrir quiénes han dejado de asistir a las citas que tenían
-programadas. 
+    El Hospital que nos contrata desea recuperar pacientes perdidos. Para eso, estudia las historias clínicas (ya digitalizadas) para descubrir quiénes han dejado de asistir a las citas que tenían programadas. 
 ### Descripción
-    La idea de nuestro proyecto es generar un programa que se fije cuales son los pacientes recuperables y cuales no, 
-con el fin de archivar a los pacientes que fallecieron, asistieron hace mas de 10 años a su ultima consulta o
-respondieron al llamado y no estan interesados en volverse a atender y dar un nuevo turno a los que si quieren
-regresar a atenderse.
+    La idea de nuestro proyecto es generar un programa que se fije cuales son los pacientes recuperables y cuales no, con el fin de archivar a los pacientes que fallecieron, asistieron hace mas de 10 años a su ultima consulta o respondieron al llamado y no estan interesados en volverse a atender y dar un nuevo turno a los que si quieren regresar a atenderse.
 ### Integrantes
 - Almada Melody 
 - Corso Pilar
