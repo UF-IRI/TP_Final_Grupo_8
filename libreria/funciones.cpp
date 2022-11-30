@@ -229,7 +229,7 @@ void agregar_pacientes_archivados(Pacientes*& lista_pac, Pacientes paciente, int
 	return;
 }
 
-void crear_archivo_pacientes_archivados(string nombre_a1, Pacientes*& lista_pac_archivados, int* tamactual) {
+/*void crear_archivo_pacientes_archivados(string nombre_a1, Pacientes*& lista_pac_archivados, int* tamactual) {
 	fstream archi, archi2;
 
 	archi.open(nombre_a1, ios::out);
@@ -256,6 +256,37 @@ void crear_archivo_pacientes_archivados(string nombre_a1, Pacientes*& lista_pac_
 	//archi2.close();
 
 	return;
+}*/
+bool crear_archivo_pacientes_archivados(string nombre_a1, Pacientes*& lista_pac_archivados, int* tamactual) {
+	fstream archi, archi2;
+
+	archi.open(nombre_a1, ios::out);
+	//archi2.open(nombre_a2, ios::out);
+	int i = 0;
+
+	//&& archi2.is_open()
+	if (archi.is_open()) {
+		archi << "dni , nombre , apellido , sexo , natalicio , estado , obra_social" << endl;
+		while (i < *tamactual) {
+			//dni , nombre , apellido , sexo , natalicio , estado , obra_social
+
+			archi << lista_pac_archivados[i].dni << " , " << lista_pac_archivados[i].nombre << " , " << lista_pac_archivados[i].apellido << " , " << lista_pac_archivados[i].sexo << " , " << lista_pac_archivados[i].natalicio << " , " << lista_pac_archivados[i].estado << " , " << lista_pac_archivados[i].id_os << "\n";
+			//archi << 10932 << " , " << 6 << " , " << 8 << endl;
+			//archi2 << "dni , apellido , nombre" << endl;
+			//archi2 << 10932 << " , Maradona , Diego" << endl;
+			//archi2 << 1000 << " , Messi , Lionel" << endl;
+			i++;
+		}
+		cout << "Se creo con exito el archivo." << endl;
+		return true;
+	}
+	else
+		return false;
+
+	archi.close();
+	//archi2.close();
+
+
 }
 
 void crear_archivo_lista_pacientes_nueva(string nombre_a1, Pacientes*& lista_pac, int* tamactual) {
@@ -626,205 +657,222 @@ int Verificar_Anio_Ultima_Consulta(tm* fecha_ultima_consulta) {
 
 }
 
+//const char*
 string Verificar_Datos_Paciente(Pacientes paciente_datos_verificar) {
+
+
+	if (paciente_datos_verificar.id_os == Obras_SocialesToString(eObras_Sociales::Medicus)) {
+		int respuesta2 = rand() % 5 + 1;
+		//Medicus, OSDE, Italiano, Espanyol, Aleman, IOSFA
+		if (respuesta2 == 1) {
+			cout << "El paciente se cambio a Osde, guardamos nueva obra social." << endl;
+			eObras_Sociales nuevo = eObras_Sociales::OSDE;
+			paciente_datos_verificar.id_os = Obras_SocialesToString(nuevo);
+
+		}
+		else if (respuesta2 == 2) {
+			cout << "El paciente se cambio a Italiano, guardamos nueva obra social." << endl;
+			eObras_Sociales nuevo = eObras_Sociales::Italiano;
+			paciente_datos_verificar.id_os = Obras_SocialesToString(nuevo);
+
+		}
+		else if (respuesta2 == 3) {
+			cout << "El paciente se cambio a Espanyol, guardamos nueva obra social." << endl;
+			eObras_Sociales nuevo = eObras_Sociales::Espanyol;
+			paciente_datos_verificar.id_os = Obras_SocialesToString(nuevo);
+
+		}
+		if (respuesta2 == 4) {
+			cout << "El paciente se cambio a Aleman, guardamos nueva obra social." << endl;
+			eObras_Sociales nuevo = eObras_Sociales::Aleman;
+			paciente_datos_verificar.id_os = Obras_SocialesToString(nuevo);
+
+		}
+		if (respuesta2 == 5) {
+			cout << "El paciente se cambio a IOSFA, guardamos nueva obra social." << endl;
+			eObras_Sociales nuevo = eObras_Sociales::IOSFA;
+			paciente_datos_verificar.id_os = Obras_SocialesToString(nuevo);
+
+		}
+
+	}
+	else if (paciente_datos_verificar.id_os == Obras_SocialesToString(eObras_Sociales::OSDE)) {
+		int respuesta2 = rand() % 5 + 1;
+
+		//Medicus, OSDE, Italiano, Espanyol, Aleman, IOSFA
+		if (respuesta2 == 1) {
+			cout << "El paciente se cambio a Medicus, guardamos nueva obra social." << endl;
+			eObras_Sociales nuevo = eObras_Sociales::Medicus;
+			paciente_datos_verificar.id_os = Obras_SocialesToString(nuevo);
+		}
+		else if (respuesta2 == 2) {
+			cout << "El paciente se cambio a Italiano, guardamos nueva obra social." << endl;
+			eObras_Sociales nuevo = eObras_Sociales::Italiano;
+			paciente_datos_verificar.id_os = Obras_SocialesToString(nuevo);
+		}
+		else if (respuesta2 == 3) {
+			cout << "El paciente se cambio a Espanyol, guardamos nueva obra social." << endl;
+			eObras_Sociales nuevo = eObras_Sociales::Espanyol;
+			paciente_datos_verificar.id_os = Obras_SocialesToString(nuevo);
+
+		}
+		if (respuesta2 == 4) {
+			cout << "El paciente se cambio a Aleman, guardamos nueva obra social." << endl;
+			eObras_Sociales nuevo = eObras_Sociales::Aleman;
+			paciente_datos_verificar.id_os = Obras_SocialesToString(nuevo);
+
+		}
+		if (respuesta2 == 5) {
+			cout << "El paciente se cambio a IOSFA, guardamos nueva obra social." << endl;
+			eObras_Sociales nuevo = eObras_Sociales::IOSFA;
+			paciente_datos_verificar.id_os = Obras_SocialesToString(nuevo);
+
+		}
+
+	}
+	else if (paciente_datos_verificar.id_os == Obras_SocialesToString(eObras_Sociales::Italiano)) {
+		int respuesta2 = rand() % 5 + 1;
+
+		//Medicus, OSDE, Italiano, Espanyol, Aleman, IOSFA
+		if (respuesta2 == 1) {
+			cout << "El paciente se cambio a Medicus, guardamos nueva obra social." << endl;
+			eObras_Sociales nuevo = eObras_Sociales::Medicus;
+			paciente_datos_verificar.id_os = Obras_SocialesToString(nuevo);
+		}
+		else if (respuesta2 == 2) {
+			cout << "El paciente se cambio a OSDE, guardamos nueva obra social." << endl;
+			eObras_Sociales nuevo = eObras_Sociales::OSDE;
+			paciente_datos_verificar.id_os = Obras_SocialesToString(nuevo);
+		}
+		else if (respuesta2 == 3) {
+			cout << "El paciente se cambio a Espanyol, guardamos nueva obra social." << endl;
+			eObras_Sociales nuevo = eObras_Sociales::Espanyol;
+			paciente_datos_verificar.id_os = Obras_SocialesToString(nuevo);
+		}
+		if (respuesta2 == 4) {
+			cout << "El paciente se cambio a Aleman, guardamos nueva obra social." << endl;
+			eObras_Sociales nuevo = eObras_Sociales::Aleman;
+			paciente_datos_verificar.id_os = Obras_SocialesToString(nuevo);
+		}
+		if (respuesta2 == 5) {
+			cout << "El paciente se cambio a IOSFA, guardamos nueva obra social." << endl;
+			eObras_Sociales nuevo = eObras_Sociales::IOSFA;
+			paciente_datos_verificar.id_os = Obras_SocialesToString(nuevo);
+		}
+
+	}
+	else if (paciente_datos_verificar.id_os == Obras_SocialesToString(eObras_Sociales::Espanyol)) {
+		int respuesta2 = rand() % 5 + 1;
+
+		//Medicus, OSDE, Italiano, Espanyol, Aleman, IOSFA
+		if (respuesta2 == 1) {
+			cout << "El paciente se cambio a Medicus, guardamos nueva obra social." << endl;
+			eObras_Sociales nuevo = eObras_Sociales::Medicus;
+			paciente_datos_verificar.id_os = Obras_SocialesToString(nuevo);
+		}
+		else if (respuesta2 == 2) {
+			cout << "El paciente se cambio a Italiano, guardamos nueva obra social." << endl;
+			eObras_Sociales nuevo = eObras_Sociales::Italiano;
+			paciente_datos_verificar.id_os = Obras_SocialesToString(nuevo);
+		}
+		else if (respuesta2 == 3) {
+			cout << "El paciente se cambio a OSDE, guardamos nueva obra social." << endl;
+			eObras_Sociales nuevo = eObras_Sociales::OSDE;
+			paciente_datos_verificar.id_os = Obras_SocialesToString(nuevo);
+		}
+		if (respuesta2 == 4) {
+			cout << "El paciente se cambio a Aleman, guardamos nueva obra social." << endl;
+			eObras_Sociales nuevo = eObras_Sociales::Aleman;
+			paciente_datos_verificar.id_os = Obras_SocialesToString(nuevo);
+		}
+		if (respuesta2 == 5) {
+			cout << "El paciente se cambio a IOSFA, guardamos nueva obra social." << endl;
+			eObras_Sociales nuevo = eObras_Sociales::IOSFA;
+			paciente_datos_verificar.id_os = Obras_SocialesToString(nuevo);
+		}
+
+	}
+	else if (paciente_datos_verificar.id_os == Obras_SocialesToString(eObras_Sociales::Aleman)) {
+		int respuesta2 = rand() % 5 + 1;
+
+		//Medicus, OSDE, Italiano, Espanyol, Aleman, IOSFA
+		if (respuesta2 == 1) {
+			cout << "El paciente se cambio a Medicus, guardamos nueva obra social." << endl;
+			eObras_Sociales nuevo = eObras_Sociales::Medicus;
+			paciente_datos_verificar.id_os = Obras_SocialesToString(nuevo);
+		}
+		else if (respuesta2 == 2) {
+			cout << "El paciente se cambio a Italiano, guardamos nueva obra social." << endl;
+			eObras_Sociales nuevo = eObras_Sociales::Italiano;
+			paciente_datos_verificar.id_os = Obras_SocialesToString(nuevo);
+		}
+		else if (respuesta2 == 3) {
+			cout << "El paciente se cambio a Espanyol, guardamos nueva obra social." << endl;
+			eObras_Sociales nuevo = eObras_Sociales::Espanyol;
+			paciente_datos_verificar.id_os = Obras_SocialesToString(nuevo);
+		}
+		if (respuesta2 == 4) {
+			cout << "El paciente se cambio a OSDE, guardamos nueva obra social." << endl;
+			eObras_Sociales nuevo = eObras_Sociales::OSDE;
+			paciente_datos_verificar.id_os = Obras_SocialesToString(nuevo);
+		}
+		if (respuesta2 == 5) {
+			cout << "El paciente se cambio a IOSFA, guardamos nueva obra social." << endl;
+			eObras_Sociales nuevo = eObras_Sociales::IOSFA;
+			paciente_datos_verificar.id_os = Obras_SocialesToString(nuevo);
+		}
+
+	}
+	else {
+		//if (paciente_datos_verificar.id_os == Obras_SocialesToString(eObras_Sociales::IOSFA)) 
+		int respuesta2 = rand() % 5 + 1;
+
+		//Medicus, OSDE, Italiano, Espanyol, Aleman, IOSFA
+		if (respuesta2 == 1) {
+			cout << "El paciente se cambio a Medicus, guardamos nueva obra social." << endl;
+			eObras_Sociales nuevo = eObras_Sociales::Medicus;
+			paciente_datos_verificar.id_os = Obras_SocialesToString(nuevo);
+		}
+		else if (respuesta2 == 2) {
+			cout << "El paciente se cambio a Italiano, guardamos nueva obra social." << endl;
+			eObras_Sociales nuevo = eObras_Sociales::Italiano;
+			paciente_datos_verificar.id_os = Obras_SocialesToString(nuevo);
+		}
+		else if (respuesta2 == 3) {
+			cout << "El paciente se cambio a Espanyol, guardamos nueva obra social." << endl;
+			eObras_Sociales nuevo = eObras_Sociales::Espanyol;
+			paciente_datos_verificar.id_os = Obras_SocialesToString(nuevo);
+		}
+		if (respuesta2 == 4) {
+			cout << "El paciente se cambio a Aleman, guardamos nueva obra social." << endl;
+			eObras_Sociales nuevo = eObras_Sociales::Aleman;
+			paciente_datos_verificar.id_os = Obras_SocialesToString(nuevo);
+		}
+		if (respuesta2 == 5) {
+			cout << "El paciente se cambio a OSDE, guardamos nueva obra social." << endl;
+			eObras_Sociales nuevo = eObras_Sociales::OSDE;
+			paciente_datos_verificar.id_os = Obras_SocialesToString(nuevo);
+		}
+
+	}
+
+	return paciente_datos_verificar.id_os;
+}
+
+bool cambio_obra_social() {
 	int respuesta1 = rand() % 2;
 
 	cout << "El paciente ha cambiado sus datos de obra social? " << endl;
 	if (respuesta1 == 1) {
 		cout << "El paciente ha cambiado de obra social, preguntamos por cual y modificamos sus datos en el archivo. " << endl;
-
-		if (paciente_datos_verificar.id_os == Obras_SocialesToString(eObras_Sociales::Medicus)) {
-			int respuesta2 = rand() % 5 + 1;
-			//Medicus, OSDE, Italiano, Espanyol, Aleman, IOSFA
-			if (respuesta2 == 1) {
-				cout << "El paciente se cambio a Osde, guardamos nueva obra social." << endl;
-				eObras_Sociales nuevo = eObras_Sociales::OSDE;
-				paciente_datos_verificar.id_os = Obras_SocialesToString(nuevo);
-			}
-			else if (respuesta2 == 2) {
-				cout << "El paciente se cambio a Italiano, guardamos nueva obra social." << endl;
-				eObras_Sociales nuevo = eObras_Sociales::Italiano;
-				paciente_datos_verificar.id_os = Obras_SocialesToString(nuevo);
-			}
-			else if (respuesta2 == 3) {
-				cout << "El paciente se cambio a Espanyol, guardamos nueva obra social." << endl;
-				eObras_Sociales nuevo = eObras_Sociales::Espanyol;
-				paciente_datos_verificar.id_os = Obras_SocialesToString(nuevo);
-			}
-			if (respuesta2 == 4) {
-				cout << "El paciente se cambio a Aleman, guardamos nueva obra social." << endl;
-				eObras_Sociales nuevo = eObras_Sociales::Aleman;
-				paciente_datos_verificar.id_os = Obras_SocialesToString(nuevo);
-			}
-			if (respuesta2 == 5) {
-				cout << "El paciente se cambio a IOSFA, guardamos nueva obra social." << endl;
-				eObras_Sociales nuevo = eObras_Sociales::IOSFA;
-				paciente_datos_verificar.id_os = Obras_SocialesToString(nuevo);
-			}
-
-		}
-		else if (paciente_datos_verificar.id_os == Obras_SocialesToString(eObras_Sociales::OSDE)) {
-			int respuesta2 = rand() % 5 + 1;
-
-			//Medicus, OSDE, Italiano, Espanyol, Aleman, IOSFA
-			if (respuesta2 == 1) {
-				cout << "El paciente se cambio a Medicus, guardamos nueva obra social." << endl;
-				eObras_Sociales nuevo = eObras_Sociales::Medicus;
-				paciente_datos_verificar.id_os = Obras_SocialesToString(nuevo);
-			}
-			else if (respuesta2 == 2) {
-				cout << "El paciente se cambio a Italiano, guardamos nueva obra social." << endl;
-				eObras_Sociales nuevo = eObras_Sociales::Italiano;
-				paciente_datos_verificar.id_os = Obras_SocialesToString(nuevo);
-			}
-			else if (respuesta2 == 3) {
-				cout << "El paciente se cambio a Espanyol, guardamos nueva obra social." << endl;
-				eObras_Sociales nuevo = eObras_Sociales::Espanyol;
-				paciente_datos_verificar.id_os = Obras_SocialesToString(nuevo);
-			}
-			if (respuesta2 == 4) {
-				cout << "El paciente se cambio a Aleman, guardamos nueva obra social." << endl;
-				eObras_Sociales nuevo = eObras_Sociales::Aleman;
-				paciente_datos_verificar.id_os = Obras_SocialesToString(nuevo);
-			}
-			if (respuesta2 == 5) {
-				cout << "El paciente se cambio a IOSFA, guardamos nueva obra social." << endl;
-				eObras_Sociales nuevo = eObras_Sociales::IOSFA;
-				paciente_datos_verificar.id_os = Obras_SocialesToString(nuevo);
-			}
-
-		}
-		else if (paciente_datos_verificar.id_os == Obras_SocialesToString(eObras_Sociales::Italiano)) {
-			int respuesta2 = rand() % 5 + 1;
-
-			//Medicus, OSDE, Italiano, Espanyol, Aleman, IOSFA
-			if (respuesta2 == 1) {
-				cout << "El paciente se cambio a Medicus, guardamos nueva obra social." << endl;
-				eObras_Sociales nuevo = eObras_Sociales::Medicus;
-				paciente_datos_verificar.id_os = Obras_SocialesToString(nuevo);
-			}
-			else if (respuesta2 == 2) {
-				cout << "El paciente se cambio a OSDE, guardamos nueva obra social." << endl;
-				eObras_Sociales nuevo = eObras_Sociales::OSDE;
-				paciente_datos_verificar.id_os = Obras_SocialesToString(nuevo);
-			}
-			else if (respuesta2 == 3) {
-				cout << "El paciente se cambio a Espanyol, guardamos nueva obra social." << endl;
-				eObras_Sociales nuevo = eObras_Sociales::Espanyol;
-				paciente_datos_verificar.id_os = Obras_SocialesToString(nuevo);
-			}
-			if (respuesta2 == 4) {
-				cout << "El paciente se cambio a Aleman, guardamos nueva obra social." << endl;
-				eObras_Sociales nuevo = eObras_Sociales::Aleman;
-				paciente_datos_verificar.id_os = Obras_SocialesToString(nuevo);
-			}
-			if (respuesta2 == 5) {
-				cout << "El paciente se cambio a IOSFA, guardamos nueva obra social." << endl;
-				eObras_Sociales nuevo = eObras_Sociales::IOSFA;
-				paciente_datos_verificar.id_os = Obras_SocialesToString(nuevo);
-			}
-
-		}
-		else if (paciente_datos_verificar.id_os == Obras_SocialesToString(eObras_Sociales::Espanyol)) {
-			int respuesta2 = rand() % 5 + 1;
-
-			//Medicus, OSDE, Italiano, Espanyol, Aleman, IOSFA
-			if (respuesta2 == 1) {
-				cout << "El paciente se cambio a Medicus, guardamos nueva obra social." << endl;
-				eObras_Sociales nuevo = eObras_Sociales::Medicus;
-				paciente_datos_verificar.id_os = Obras_SocialesToString(nuevo);
-			}
-			else if (respuesta2 == 2) {
-				cout << "El paciente se cambio a Italiano, guardamos nueva obra social." << endl;
-				eObras_Sociales nuevo = eObras_Sociales::Italiano;
-				paciente_datos_verificar.id_os = Obras_SocialesToString(nuevo);
-			}
-			else if (respuesta2 == 3) {
-				cout << "El paciente se cambio a OSDE, guardamos nueva obra social." << endl;
-				eObras_Sociales nuevo = eObras_Sociales::OSDE;
-				paciente_datos_verificar.id_os = Obras_SocialesToString(nuevo);
-			}
-			if (respuesta2 == 4) {
-				cout << "El paciente se cambio a Aleman, guardamos nueva obra social." << endl;
-				eObras_Sociales nuevo = eObras_Sociales::Aleman;
-				paciente_datos_verificar.id_os = Obras_SocialesToString(nuevo);
-			}
-			if (respuesta2 == 5) {
-				cout << "El paciente se cambio a IOSFA, guardamos nueva obra social." << endl;
-				eObras_Sociales nuevo = eObras_Sociales::IOSFA;
-				paciente_datos_verificar.id_os = Obras_SocialesToString(nuevo);
-			}
-
-		}
-		else if (paciente_datos_verificar.id_os == Obras_SocialesToString(eObras_Sociales::Aleman)) {
-			int respuesta2 = rand() % 5 + 1;
-
-			//Medicus, OSDE, Italiano, Espanyol, Aleman, IOSFA
-			if (respuesta2 == 1) {
-				cout << "El paciente se cambio a Medicus, guardamos nueva obra social." << endl;
-				eObras_Sociales nuevo = eObras_Sociales::Medicus;
-				paciente_datos_verificar.id_os = Obras_SocialesToString(nuevo);
-			}
-			else if (respuesta2 == 2) {
-				cout << "El paciente se cambio a Italiano, guardamos nueva obra social." << endl;
-				eObras_Sociales nuevo = eObras_Sociales::Italiano;
-				paciente_datos_verificar.id_os = Obras_SocialesToString(nuevo);
-			}
-			else if (respuesta2 == 3) {
-				cout << "El paciente se cambio a Espanyol, guardamos nueva obra social." << endl;
-				eObras_Sociales nuevo = eObras_Sociales::Espanyol;
-				paciente_datos_verificar.id_os = Obras_SocialesToString(nuevo);
-			}
-			if (respuesta2 == 4) {
-				cout << "El paciente se cambio a OSDE, guardamos nueva obra social." << endl;
-				eObras_Sociales nuevo = eObras_Sociales::OSDE;
-				paciente_datos_verificar.id_os = Obras_SocialesToString(nuevo);
-			}
-			if (respuesta2 == 5) {
-				cout << "El paciente se cambio a IOSFA, guardamos nueva obra social." << endl;
-				eObras_Sociales nuevo = eObras_Sociales::IOSFA;
-				paciente_datos_verificar.id_os = Obras_SocialesToString(nuevo);
-			}
-
-		}
-		else {
-			//if (paciente_datos_verificar.id_os == Obras_SocialesToString(eObras_Sociales::IOSFA)) 
-			int respuesta2 = rand() % 5 + 1;
-
-			//Medicus, OSDE, Italiano, Espanyol, Aleman, IOSFA
-			if (respuesta2 == 1) {
-				cout << "El paciente se cambio a Medicus, guardamos nueva obra social." << endl;
-				eObras_Sociales nuevo = eObras_Sociales::Medicus;
-				paciente_datos_verificar.id_os = Obras_SocialesToString(nuevo);
-			}
-			else if (respuesta2 == 2) {
-				cout << "El paciente se cambio a Italiano, guardamos nueva obra social." << endl;
-				eObras_Sociales nuevo = eObras_Sociales::Italiano;
-				paciente_datos_verificar.id_os = Obras_SocialesToString(nuevo);
-			}
-			else if (respuesta2 == 3) {
-				cout << "El paciente se cambio a Espanyol, guardamos nueva obra social." << endl;
-				eObras_Sociales nuevo = eObras_Sociales::Espanyol;
-				paciente_datos_verificar.id_os = Obras_SocialesToString(nuevo);
-			}
-			if (respuesta2 == 4) {
-				cout << "El paciente se cambio a Aleman, guardamos nueva obra social." << endl;
-				eObras_Sociales nuevo = eObras_Sociales::Aleman;
-				paciente_datos_verificar.id_os = Obras_SocialesToString(nuevo);
-			}
-			if (respuesta2 == 5) {
-				cout << "El paciente se cambio a OSDE, guardamos nueva obra social." << endl;
-				eObras_Sociales nuevo = eObras_Sociales::OSDE;
-				paciente_datos_verificar.id_os = Obras_SocialesToString(nuevo);
-			}
-
-		}
-
+		return true;
 	}
-	else
+	else {
 		cout << "El paciente no se cambio de obra social." << endl;
+		return false;
+	}
 
-	return paciente_datos_verificar.id_os;
+
 }
 
 tm* fecha_nuevo_turno_random() {
@@ -1138,14 +1186,29 @@ void Secretaria(Pacientes* lista_pac, Consultas* lista_consultas, Contactos* lis
 							nueva_consulta.matricula_med = medico_nueva_consulta->matricula;
 							nueva_consulta.presento = false;
 
-							cout << "Datos de la nueva consulta: " << endl;
-							cout << "DNI del paciente: " << nueva_consulta.dni_pac << endl;
-							cout << "Fecha en la cual se solicito el turno: " << nueva_consulta.fecha_solicitado << endl;
-							cout << "Fecha del turno: " << nueva_consulta.fecha_turno << endl;
-							cout << "Matricula del medico del proximo turno: " << nueva_consulta.matricula_med << endl;
-							cout << "Se presento el paciente?: " << nueva_consulta.presento << endl;
-							string nueva_obra = Verificar_Datos_Paciente(lista_pac[i]);
-							cout << "Obra social nueva: " << nueva_obra << endl;
+							if (cambio_obra_social() == true) {
+								string nueva_obra = Verificar_Datos_Paciente(lista_pac[i]);
+								cout << "Datos de la nueva consulta: " << endl;
+								cout << "DNI del paciente: " << nueva_consulta.dni_pac << endl;
+								cout << "Fecha en la cual se solicito el turno: " << nueva_consulta.fecha_solicitado << endl;
+								cout << "Fecha del turno: " << nueva_consulta.fecha_turno << endl;
+								cout << "Matricula del medico del proximo turno: " << nueva_consulta.matricula_med << endl;
+								cout << "Se presento el paciente?: " << nueva_consulta.presento << endl;
+								cout << "Obra social nueva: " << nueva_obra << endl;
+							}
+							else {
+								cout << "Datos de la nueva consulta: " << endl;
+								cout << "DNI del paciente: " << nueva_consulta.dni_pac << endl;
+								cout << "Fecha en la cual se solicito el turno: " << nueva_consulta.fecha_solicitado << endl;
+								cout << "Fecha del turno: " << nueva_consulta.fecha_turno << endl;
+								cout << "Matricula del medico del proximo turno: " << nueva_consulta.matricula_med << endl;
+								cout << "Se presento el paciente?: " << nueva_consulta.presento << endl;
+								cout << "Obra social" << lista_pac[i].id_os << endl;
+							}
+
+
+
+
 
 
 						}
@@ -1219,17 +1282,27 @@ void Secretaria(Pacientes* lista_pac, Consultas* lista_consultas, Contactos* lis
 										nueva_consulta.matricula_med = medico_nueva_consulta->matricula;
 										nueva_consulta.presento = false;
 
-										cout << "Datos de la nueva consulta: " << endl;
-										cout << "DNI del paciente: " << nueva_consulta.dni_pac << endl;
-										cout << "Fecha en la cual se solicito el turno: " << nueva_consulta.fecha_solicitado << endl;
-										cout << "Fecha del turno: " << nueva_consulta.fecha_turno << endl;
-										cout << "Matricula del medico del proximo turno: " << nueva_consulta.matricula_med << endl;
-										cout << "Se presento el paciente?: " << nueva_consulta.presento << endl;
-										//guardamos la info en la lista de consultas
-										//VER
-										Verificar_Datos_Paciente(lista_pac[i]);
+										if (cambio_obra_social() == true) {
+											string nueva_obra = Verificar_Datos_Paciente(lista_pac[i]);
+											cout << "Datos de la nueva consulta: " << endl;
+											cout << "DNI del paciente: " << nueva_consulta.dni_pac << endl;
+											cout << "Fecha en la cual se solicito el turno: " << nueva_consulta.fecha_solicitado << endl;
+											cout << "Fecha del turno: " << nueva_consulta.fecha_turno << endl;
+											cout << "Matricula del medico del proximo turno: " << nueva_consulta.matricula_med << endl;
+											cout << "Se presento el paciente?: " << nueva_consulta.presento << endl;
+											cout << "Obra social nueva: " << nueva_obra << endl;
+										}
+										else {
+											cout << "Datos de la nueva consulta: " << endl;
+											cout << "DNI del paciente: " << nueva_consulta.dni_pac << endl;
+											cout << "Fecha en la cual se solicito el turno: " << nueva_consulta.fecha_solicitado << endl;
+											cout << "Fecha del turno: " << nueva_consulta.fecha_turno << endl;
+											cout << "Matricula del medico del proximo turno: " << nueva_consulta.matricula_med << endl;
+											cout << "Se presento el paciente?: " << nueva_consulta.presento << endl;
+											cout << "Obra social" << lista_pac[i].id_os << endl;
+										}
 										//agregar_consultas(nueva_lista_auxiliar_consultas, nueva_consulta, &tam_lista_consultas_auxiliar);
-										cout << "Obra social nueva: " << lista_pac[i].id_os << endl;
+
 									}
 									//else
 									//	cout << "Hubo problemas para asignar un medico con disponibilidad, volveremos a llamar al paciente en unos dias. " << endl;
@@ -1315,19 +1388,24 @@ void Secretaria(Pacientes* lista_pac, Consultas* lista_consultas, Contactos* lis
 		//cout << "Presento: " << lista_aux_cons[i].presento << endl;
 	//}
 
-	crear_archivo_pacientes_archivados("Pacientes_Archivados.csv", lista_pac_archivados, &tam_lista_archivados);
+	bool resp_pac_archivados = crear_archivo_pacientes_archivados("Pacientes_Archivados.csv", lista_pac_archivados, &tam_lista_archivados);
 
 	Pacientes* lista_archivados;
 	lista_archivados = read_archivo_pacientes_archivados("Pacientes_Archivados.csv");
+	if (resp_pac_archivados) {
+		cout << "Leyendo pacientes archivados:" << endl;
+		for (int i = 0; i < tam_lista_archivados; i++) {
+			cout << lista_archivados[i].dni << "," << lista_archivados[i].nombre << "," << lista_archivados[i].apellido << "," << lista_archivados[i].sexo << "," << lista_archivados[i].natalicio << "," << lista_archivados[i].estado << "," << lista_archivados[i].id_os << endl;
+		}
+		Agregar_Archivado(lista_pac, lista_archivados, tam_pacientes, &tam_lista_archivados);
 
-	cout << "Leyendo pacientes archivados:" << endl;
-	for (int i = 0; i < tam_lista_archivados; i++) {
-		cout << lista_archivados[i].dni << "," << lista_archivados[i].nombre << "," << lista_archivados[i].apellido << "," << lista_archivados[i].sexo << "," << lista_archivados[i].natalicio << "," << lista_archivados[i].estado << "," << lista_archivados[i].id_os << endl;
+		crear_archivo_lista_pacientes_nueva("Pacientes_Nueva_Lista.csv", lista_pac, tam_pacientes);
 	}
+	else
+		cout << "Error al crear lista de pacientes archivado. " << endl;
 
-	Agregar_Archivado(lista_pac, lista_archivados, tam_pacientes, &tam_lista_archivados);
 
-	crear_archivo_lista_pacientes_nueva("Pacientes_Nueva_Lista.csv", lista_pac, tam_pacientes);
+
 
 	Pacientes* lista_nueva_pac1;
 	lista_nueva_pac1 = read_archivo_lista_pacientes_nueva("Pacientes_Nueva_Lista.csv");
@@ -1337,7 +1415,38 @@ void Secretaria(Pacientes* lista_pac, Consultas* lista_consultas, Contactos* lis
 		cout << lista_nueva_pac1[i].dni << "," << lista_nueva_pac1[i].nombre << "," << lista_nueva_pac1[i].apellido << " , " << lista_nueva_pac1[i].sexo << " , " << lista_nueva_pac1[i].natalicio << " , " << lista_nueva_pac1[i].estado << " , " << lista_nueva_pac1[i].id_os << " , " << lista_nueva_pac1[i].archivado << endl;
 	}
 }
+//bool crear_archivo_pacientes_archivados2(string nombre_a1, Pacientes*& lista_pac_archivados, int* tamactual) 
+/* {
+	fstream archi, archi2;
 
+	archi.open(nombre_a1, ios::out);
+	//archi2.open(nombre_a2, ios::out);
+	int i = 0;
+
+	//&& archi2.is_open()
+	if (archi.is_open()) {
+		archi << "dni , nombre , apellido , sexo , natalicio , estado , obra_social" << endl;
+		while (i < *tamactual) {
+			//dni , nombre , apellido , sexo , natalicio , estado , obra_social
+
+			archi << lista_pac_archivados[i].dni << " , " << lista_pac_archivados[i].nombre << " , " << lista_pac_archivados[i].apellido << " , " << lista_pac_archivados[i].sexo << " , " << lista_pac_archivados[i].natalicio << " , " << lista_pac_archivados[i].estado << " , " << lista_pac_archivados[i].id_os << "\n";
+			//archi << 10932 << " , " << 6 << " , " << 8 << endl;
+			//archi2 << "dni , apellido , nombre" << endl;
+			//archi2 << 10932 << " , Maradona , Diego" << endl;
+			//archi2 << 1000 << " , Messi , Lionel" << endl;
+			i++;
+		}
+		cout << "Se creo con exito el archivo." << endl;
+		return true;
+	}
+	else
+		return false;
+
+	archi.close();
+	//archi2.close();
+
+
+}*/
 
 /*
 * /*cout << "El paciente desea asignar un turno con el medico que lo atendió en su ultima consulta?" << endl;
@@ -1398,32 +1507,32 @@ void Secretaria(Pacientes* lista_pac, Consultas* lista_consultas, Contactos* lis
 			return false;//turno no asignado
 		}
 	}*/
-/*
-	Medicos* Buscar_Medico_Nuevo(Medicos* Lista_Medicos, Pacientes paciente, int tam) {
+	/*
+		Medicos* Buscar_Medico_Nuevo(Medicos* Lista_Medicos, Pacientes paciente, int tam) {
 
-		Medicos* aux=NULL;
-		for (int i = 0; i < tam; i++) {
-			int respuesta_agenda_llena = rand() % 2;
-			if (paciente.consulta.matricula_med != Lista_Medicos[i].matricula && Lista_Medicos[i].activo == true && respuesta_agenda_llena == false) { //chequeamos solo si encuentra ==matricula, hay que ver del boolean agenda_llena
-				//le asigna el primer medico activo y que no sea el que lo haya atendido antes, tambien que sea de la especialidad que busca
-				*aux = Lista_Medicos[i];
-			}//habria que ver porque deberia fijarse si el medico tiene agenda llena o algo asi, entonces recorre la lista y se fija de asignar turno con el primer medico que encuentre
-			else
-				return NULL;
-		}
-		return aux;//retornamos el medico
-	}
-
-	Medicos* Buscar_Medico_Viejo(Medicos* Lista_Medicos, Pacientes paciente, int tam) {
-
-		Medicos* aux=NULL;
-		for (int i = 0; i < tam; i++) {
-			if (paciente.consulta.matricula_med == Lista_Medicos[i].matricula && Lista_Medicos[i].activo == true) { //chequeamos solo si encuentra ==matricula, hay que ver del boolean agenda_llena
-				//si encuentra al medico que lo habia atendido antes y este se encuentra disponible, misma especialidad???
-				*aux = Lista_Medicos[i]; //encontramos al medico
+			Medicos* aux=NULL;
+			for (int i = 0; i < tam; i++) {
+				int respuesta_agenda_llena = rand() % 2;
+				if (paciente.consulta.matricula_med != Lista_Medicos[i].matricula && Lista_Medicos[i].activo == true && respuesta_agenda_llena == false) { //chequeamos solo si encuentra ==matricula, hay que ver del boolean agenda_llena
+					//le asigna el primer medico activo y que no sea el que lo haya atendido antes, tambien que sea de la especialidad que busca
+					*aux = Lista_Medicos[i];
+				}//habria que ver porque deberia fijarse si el medico tiene agenda llena o algo asi, entonces recorre la lista y se fija de asignar turno con el primer medico que encuentre
+				else
+					return NULL;
 			}
-			else
-				return NULL;
+			return aux;//retornamos el medico
 		}
-		return aux;//retornamos el struct del medico, significa que se puede asignar turno con el medico
-	}*/
+
+		Medicos* Buscar_Medico_Viejo(Medicos* Lista_Medicos, Pacientes paciente, int tam) {
+
+			Medicos* aux=NULL;
+			for (int i = 0; i < tam; i++) {
+				if (paciente.consulta.matricula_med == Lista_Medicos[i].matricula && Lista_Medicos[i].activo == true) { //chequeamos solo si encuentra ==matricula, hay que ver del boolean agenda_llena
+					//si encuentra al medico que lo habia atendido antes y este se encuentra disponible, misma especialidad???
+					*aux = Lista_Medicos[i]; //encontramos al medico
+				}
+				else
+					return NULL;
+			}
+			return aux;//retornamos el struct del medico, significa que se puede asignar turno con el medico
+		}*/

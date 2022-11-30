@@ -14,6 +14,8 @@ using namespace std;
 
 enum class eObras_Sociales { Medicus, OSDE, Italiano, Espanyol, Aleman, IOSFA };
 
+string Obras_SocialesToString(eObras_Sociales obras);
+
 typedef struct Medicos {
 
 	string matricula;
@@ -90,7 +92,9 @@ Medicos* Asignar_Medico(Medicos* Lista_Medicos, Consultas* lista_cons, int* cont
 // deberiamos borrar al paciente de la lista general.
 
 //funciona
+//const char*
 string Verificar_Datos_Paciente(Pacientes paciente_datos_verificar);
+bool cambio_obra_social();
 //void Verificar_Datos_Paciente(Pacientes paciente_datos_verificar);
 // Esta funcion deberia hacer el cuestionario de preguntas para ver si hubo 
 // cambios en datos de paciente, como numero de telefono, obra social, etc.
@@ -99,7 +103,6 @@ string Verificar_Datos_Paciente(Pacientes paciente_datos_verificar);
 //Pacientes* archivar_pacientes(Pacientes*& lista_pac_a_archivar, int* contador5);
 // Esta funcion es para los pacientes que se encuentran fallecidos o que ya 
 // no desean atenderse en nuetro centro medico. Eliminar de la anterior lista y agregar a la nueva de archivados?
-
 
 // Sino se pudo contactar con el contacto de emergencia, si atiende preguntamos por paciente, sino atiende
 // dejamos en stadby y volvemos a llamar luego!! respuesta random true or false
@@ -135,8 +138,9 @@ Contactos* read_archivo_contactos(string a1, int* contador4);
 void agregar_pacientes_archivados(Pacientes*& lista_pac, Pacientes paciente, int* tamactual);
 //ver si hace falta porque es igual a la de agregar pacientes, capaz es innecesaria
 
-void crear_archivo_pacientes_archivados(string nombre_a1, Pacientes*& lista_pac_archivados, int* tamactual);
+//void crear_archivo_pacientes_archivados(string nombre_a1, Pacientes*& lista_pac_archivados, int* tamactual);
 
+bool crear_archivo_pacientes_archivados(string nombre_a1, Pacientes*& lista_pac_archivados, int* tamactual);
 //Pacientes* archivar_pacientes(Pacientes*& lista_pac_a_archivar, int* contador5);
 
 Pacientes* read_archivo_pacientes_archivados(string a1);
