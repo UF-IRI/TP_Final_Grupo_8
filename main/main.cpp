@@ -1,9 +1,14 @@
 #include "iri.cpp"
 #include <iostream>
 #include "funciones.h"
-
+#include "string"
 
 int main() {
+	fstream file; //object of fstream class
+
+	//open file "test.txt" in out(write) mode
+	// ios::out Open for output operations.
+	file.open("test.txt", ios::out);
 
 	int contador = 0;
 	int* p = &contador;
@@ -26,9 +31,6 @@ int main() {
 	Contactos* lista3;
 	lista3 = read_archivo_contactos("Contactos.csv", &contador4);
 
-
-
-
 	Consultas* lista_cons;
 	Contactos* lista_filtrada_contactos;
 	Medicos* medico_nueva_consulta;
@@ -36,24 +38,6 @@ int main() {
 
 	//los contador restan 1 porque sino imprime el ultimo 2 veces, ver si es solucion optima o no
 
-	Secretaria(lista, lista1, lista3, lista2, &contador, &contador2, &contador4, &contador3);
-
-	cout << "Imprimiento lista de consultas. " << endl;
-	for (int i = 0; i < contador2 - 1; i++) {
-		cout << lista1[i].dni_pac << "," << lista1[i].fecha_solicitado << "," << lista1[i].fecha_turno << "," << lista1[i].presento << "," << lista1[i].matricula_med << endl;
-	}
-	cout << "\n" << endl;
-
-	cout << "Imprimiendo lista de medicos. " << endl;
-	for (int i = 0; i < contador3 - 1; i++) {
-		cout << lista2[i].matricula << "," << lista2[i].nombre << "," << lista2[i].apellido << "," << lista2[i].telefono << "," << lista2[i].especialidad << "," << lista2[i].activo << endl;
-	}
-	cout << "\n" << endl;
-
-	cout << "Imprimiendo lista de contactos. " << endl;
-	for (int i = 0; i < contador4 - 1; i++) {
-		cout << lista3[i].dni_pac << "," << lista3[i].telefono << "," << lista3[i].celular << "," << lista3[i].direccion << "," << lista3[i].mail << endl;
-	}
-	cout << "\n" << endl;
+	LLamado_Secretaria(lista, lista1, lista3, lista2, &contador, &contador2, &contador4, &contador3);
 
 }

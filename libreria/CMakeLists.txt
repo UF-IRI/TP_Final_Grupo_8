@@ -1,6 +1,6 @@
 ## >>>>>>>>>>>>>>>
 ## >>>>>>>>>>>>>>>
-add_library(libreria dummy.cpp "funciones.cpp")
+add_library(libreria dummy.cpp "funciones.cpp" "impresiones.cpp" "impresiones.h")
 ## <<<<<<<<<<<<<<<
 ## <<<<<<<<<<<<<<<
 

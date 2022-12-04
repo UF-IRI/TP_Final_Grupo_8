@@ -31,7 +31,7 @@ namespace foobar::tests {
 		fecha->tm_mon = 3;
 		fecha->tm_mday = 20;
 		EXPECT_NE(fecha_nuevo_turno_random(), fecha);
-	}
+	}/*
 	TEST(testfuncion4, pruebacrear_archivo_paciente_archivados) {
 		int tamaño = 3;
 		Pacientes* lista = new Pacientes[3];
@@ -63,7 +63,7 @@ namespace foobar::tests {
 		lista[0].sexo = 'M';
 
 		EXPECT_TRUE(crear_archivo_pacientes_archivados("pacientes_archivados.csv", lista, &tamaño));
-	}
+	}*/
 	TEST(testfuncion5, pruebaVerificar_Datos_Paciente) {
 
 		Pacientes paciente_datos_verificar;

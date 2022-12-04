@@ -57,15 +57,91 @@ typedef struct Pacientes {
 	string estado;
 	string id_os;
 	string archivado;
-	//Contactos contacto;//tendria que tener 2? uno de emergencia y otra dle mismo paciente
-	//Consultas consulta;//consulta asociada, lee la del paciente
 
 }Pacientes;
+
+void agregar_pacientes(Pacientes*& lista_pac, Pacientes paciente, int* tamactual);
+
+void agregar_medicos(Medicos*& lista_med, Medicos medico, int* tamactual);
+
+void agregar_consultas(Consultas*& lista_cons, Consultas consulta, int* tamactual);
+
+void agregar_contactos(Contactos*& lista_cont, Contactos contacto, int* tamactual);
+
+void agregar_consultas_extra(Consultas consulta, string a1, int* contador);
+
+Pacientes* read_archivo_pacientes(string a1, int* contador);
+
+Medicos* read_archivo_medicos(string a1, int* contador);
+
+Consultas* read_archivo_consultas(string a1, int* contador2);
+
+Contactos* read_archivo_contactos(string a1, int* contador4);
+
+void crear_archivo_consultas_nuevas(string nombre_a1, Consultas*& lista_consultas_nuevas, int* tamactual);
+
+Consultas* read_archivo_nuevas_consultas(string a1);
+
+void agregar_pacientes_archivados(Pacientes*& lista_pac, Pacientes paciente, int* tamactual);
+
+void crear_archivo_pacientes_archivados(string nombre_a1, Pacientes*& lista_pac_archivados, int* tamactual);
+
+Pacientes* read_archivo_pacientes_archivados(string a1);
+
+void crear_archivo_lista_pacientes_nueva(string nombre_a1, Pacientes*& lista_pac, int* tamactual);
+
+Pacientes* read_archivo_lista_pacientes_nueva(string a1);
+
+tm* toInt(string cadena);
+
+Contactos* filtrar_lista_por_dni_contactos(Contactos* lista_contactos, Pacientes pac, int* tamactual, int* tam);
+
+Consultas* filtrar_lista_por_dni(Consultas* lista_consultas, Pacientes pac, int* tamactual, int* tam);
+
+tm* Encontrar_Consulta_Fecha(Consultas* lista_consultas_filtradas, int* tamactual);
+
+Consultas* encontrar_ultima_consulta(Consultas* lista_consultas_filtradas, int* tamactual);
+
+Medicos* Buscar_Medico_Viejo(Medicos* Lista_Medicos, Consultas* lista_consultas, int* contador6, int* tam);
+
+Medicos* Buscar_Medico_Nuevo(Medicos* Lista_Medicos, Consultas* lista_consultas, int* contador6, int* tam);
+
+Pacientes* Buscar_Pacientes_Archivados(Pacientes* lista_pac, Pacientes pac_archivado_a_buscar, int* tam);
+
+int Verificar_Anio_Ultima_Consulta(tm* fecha_ultima_consulta);
+
+string Verificar_Datos_Paciente(Pacientes paciente_datos_verificar);
+
+int verificar_estado_paciente(Pacientes paciente_a_verificar);
+
+tm* fecha_nuevo_turno_random();
+
+void Agregar_Archivado(Pacientes* lista_pac_antigua, Pacientes* lista_archivados, int* tam_ant, int* tam_arch);
+
+Medicos* Asignar_Medico(Medicos* Lista_Medicos, Consultas* lista_cons, int* contador6, int* contador3);
+
+Contactos* buscar_contacto_emergencia(Contactos* lista_contactos, int* tam_contactos, Pacientes pac_a_llamar, Contactos* contacto_pac);
+
+Contactos* buscar_contacto_pac(Contactos* lista_contactos, int* tam_contactos, Pacientes pac_a_llamar);
+
+int verificar_anio_2(tm* fecha_ultima_consulta);
+
+bool cambio_obra_social();
+
+string fecha_de_hoy();
+
+string fecha_turno(tm* fecha_turno);
+
+void Imprimir_Datos_Consulta(Consultas nueva_consulta, Pacientes lista_pac);
+
+
+void LLamado_Secretaria(Pacientes* lista_pac, int* tam_pacientes, Pacientes* lista_nueva_verificados, Consultas* lista_consultas, Contactos* lista_contactos, Medicos* lista_medicos, int* tam_pacientes_verificados, int* tam_consultas, int* tam_contactos, int* tam_medicos, Pacientes*& lista_pac_archivados, int* tam_lista_archivados);
+
 
 //funciones principales
 
 //funciona
-Medicos* Buscar_Medico_Viejo(Medicos* Lista_Medicos, Consultas* lista_consultas, int* contador6, int* tam);
+
 //la idea de esta funcion es levantar el archivo de 
 // la idea de esta funcion es levantar el archivo de medicos, fijarse si el medico que 
 // habia atendido al paciente sigue trabajando en el hospital y ver si tiene disponibilidad 
@@ -73,14 +149,14 @@ Medicos* Buscar_Medico_Viejo(Medicos* Lista_Medicos, Consultas* lista_consultas,
 // Habria que ver si usamos esta funcion dentro de asignar turno o viceversa
 
 //funciona
-Medicos* Buscar_Medico_Nuevo(Medicos* Lista_Medicos, Consultas* lista_consultas, int* contador6, int* tam);
+
 // La idea de esta funcion es que si no se pudo asignar turno con el nuevo medico, 
 // se busque en la lista de medicos al primer medico que tenga disponibilidad en 
 // su agenda para un nuevo turno.
 // Habria que ver si usamos esta funcion dentro de asignar turno o viceversa.
 
 //funciona
-Medicos* Asignar_Medico(Medicos* Lista_Medicos, Consultas* lista_cons, int* contador6, int* contador3);
+
 // La idea de la funcion asignar_turno es que reciba al paciente que desea asignar turno, que busque 
 // al medico viejo o nuevo que tenga disponibilidad para asignarle su nueva consulta, una vez hecho 
 // eso, tendriamos que recorrer la lista de pacientes_agenda y guardar el turno.
@@ -93,8 +169,7 @@ Medicos* Asignar_Medico(Medicos* Lista_Medicos, Consultas* lista_cons, int* cont
 
 //funciona
 //const char*
-string Verificar_Datos_Paciente(Pacientes paciente_datos_verificar);
-bool cambio_obra_social();
+
 //void Verificar_Datos_Paciente(Pacientes paciente_datos_verificar);
 // Esta funcion deberia hacer el cuestionario de preguntas para ver si hubo 
 // cambios en datos de paciente, como numero de telefono, obra social, etc.
@@ -115,57 +190,20 @@ bool cambio_obra_social();
 //asignar un turno al paciente
 
 //funciones para agregar datos de archivos leidos
-void agregar_pacientes(Pacientes*& lista_pac, Pacientes paciente, int* tamactual);
-
-void agregar_medicos(Medicos*& lista_med, Medicos medico, int* tamactual);
-
-void agregar_consultas(Consultas*& lista_cons, Consultas consulta, int* tamactual);
-
-void agregar_contactos(Contactos*& lista_cont, Contactos contacto, int* tamactual);
 
 
 //funciones para leer los archivos csv
-Pacientes* read_archivo_pacientes(string a1, int* contador);
 
-Medicos* read_archivo_medicos(string a1, int* contador);
-
-Consultas* read_archivo_consultas(string a1, int* contador2);
-
-Contactos* read_archivo_contactos(string a1, int* contador4);
 
 
 //funciones para crear archivos
-void agregar_pacientes_archivados(Pacientes*& lista_pac, Pacientes paciente, int* tamactual);
+
 //ver si hace falta porque es igual a la de agregar pacientes, capaz es innecesaria
 
 //void crear_archivo_pacientes_archivados(string nombre_a1, Pacientes*& lista_pac_archivados, int* tamactual);
 
-bool crear_archivo_pacientes_archivados(string nombre_a1, Pacientes*& lista_pac_archivados, int* tamactual);
+
 //Pacientes* archivar_pacientes(Pacientes*& lista_pac_a_archivar, int* contador5);
 
-Pacientes* read_archivo_pacientes_archivados(string a1);
-
-Pacientes* read_archivo_lista_pacientes_nueva(string a1);
 
 //funciones
-tm* toInt(string cadena);
-
-Consultas* filtrar_lista_por_dni(Consultas* lista_consultas, Pacientes pac, int* tamactual, int* tam);
-
-tm* Encontrar_Consulta_Fecha(Consultas* lista_consultas_filtradas, int* tamactual);
-
-Consultas encontrar_ultima_consulta(Consultas* lista_consultas_filtradas, int* tamactual);
-
-Pacientes* Buscar_Pacientes_Archivados(Pacientes* lista_pac, Pacientes pac_archivado_a_buscar, int* tam);
-
-int Verificar_Anio_Ultima_Consulta(tm* fecha_ultima_consulta);
-
-tm* fecha_nuevo_turno_random();
-
-void Agregar_Archivado(Pacientes* lista_pac_antigua, Pacientes* lista_archivados, int* tam_ant, int* tam_arch);
-
-Contactos* buscar_contacto_emergencia(Contactos* lista_contactos, int* tam_contactos, Pacientes pac_a_llamar, Contactos* contacto_pac);
-
-Contactos* buscar_contacto_pac(Contactos* lista_contactos, int* tam_contactos, Pacientes pac_a_llamar);
-
-void Secretaria(Pacientes* lista_pac, Consultas* lista_consultas, Contactos* lista_contactos, Medicos* lista_medicos, int* tam_pacientes, int* tam_consultas, int* tam_contactos, int* tam_medicos);
