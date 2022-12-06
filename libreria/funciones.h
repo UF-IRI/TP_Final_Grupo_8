@@ -91,6 +91,7 @@ void crear_archivo_lista_pacientes_nueva(string nombre_a1, Pacientes*& lista_pac
 
 void crear_archivo_pacientes_archivados(string nombre_a1, Pacientes*& lista_pac_archivados, int* tamactual);
 
+string asignar_obra_String(eObras_Sociales obras_aux);
 
 tm* toInt(string cadena);
 

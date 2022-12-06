@@ -533,7 +533,7 @@ int Verificar_Anio_Ultima_Consulta(tm* fecha_ultima_consulta) {
 	tm* nuevo = localtime(&t);
 	nuevo->tm_year = (aux2->tm_year) - (fecha_ultima_consulta->tm_year);
 
-	cout << "Diferencia de años: " << nuevo->tm_year << endl;
+	//cout << "Diferencia de años: " << nuevo->tm_year << endl;
 
 	if (nuevo->tm_year < 10 && nuevo->tm_year>0) {
 		return 1;
@@ -567,20 +567,24 @@ int Verificar_Anio_Ultima_Consulta(tm* fecha_ultima_consulta) {
 		return 2; //paciente tiene turno actual
 	else if (nuevo->tm_year == 0) {
 		if (fecha_ultima_consulta->tm_mon > aux2->tm_mon)
-			return 2;
+			return 2;//paciente tiene turno actual
 		else if (fecha_ultima_consulta->tm_mon == aux2->tm_mon) {
 			if (fecha_ultima_consulta->tm_mday >= aux2->tm_mday) {
-				return 2;
-				//todavia no se cumplieron los 10 años o se cumplieron los 10 años justo ese dia
-				//pero es un paciente recuperable, podemos llamarlo
+				return 2;//paciente tiene turno actual
 			}
-			else//el dia de la ultima consulta es mas chico, se supero el limite
+			else//el dia de la ultima consulta es mas chico, ya paso el turno, fecha menor a 10 años, paciente recuperable
 				return 1;
 		}
 		else if (fecha_ultima_consulta->tm_mon < aux2->tm_mon)
-			return 1;
+			return 1;//mes de consulta mas chico, ya paso el turno, fecha menor a 10 años, paciente recuperable
 	}
 
+}
+
+string asignar_obra_String(eObras_Sociales obras_aux) {
+	string aux = "";
+	aux = Obras_SocialesToString(obras_aux);
+	return aux;
 }
 
 string Verificar_Datos_Paciente(Pacientes paciente_datos_verificar) {
@@ -594,27 +598,27 @@ string Verificar_Datos_Paciente(Pacientes paciente_datos_verificar) {
 		if (respuesta2 == 1) {
 			cout << "El paciente se cambio a Osde, guardamos nueva obra social." << endl;
 			eObras_Sociales nuevo = eObras_Sociales::OSDE;
-			aux = Obras_SocialesToString(nuevo);
+			aux = asignar_obra_String(nuevo);
 		}
 		else if (respuesta2 == 2) {
 			cout << "El paciente se cambio a Italiano, guardamos nueva obra social." << endl;
 			eObras_Sociales nuevo = eObras_Sociales::Italiano;
-			aux = Obras_SocialesToString(nuevo);
+			aux = asignar_obra_String(nuevo);
 		}
 		else if (respuesta2 == 3) {
 			cout << "El paciente se cambio a Espanyol, guardamos nueva obra social." << endl;
 			eObras_Sociales nuevo = eObras_Sociales::Espanyol;
-			aux = Obras_SocialesToString(nuevo);
+			aux = asignar_obra_String(nuevo);
 		}
 		if (respuesta2 == 4) {
 			cout << "El paciente se cambio a Aleman, guardamos nueva obra social." << endl;
 			eObras_Sociales nuevo = eObras_Sociales::Aleman;
-			paciente_datos_verificar.id_os = Obras_SocialesToString(nuevo);
+			aux = asignar_obra_String(nuevo);
 		}
 		if (respuesta2 == 5) {
 			cout << "El paciente se cambio a IOSFA, guardamos nueva obra social." << endl;
 			eObras_Sociales nuevo = eObras_Sociales::IOSFA;
-			aux = Obras_SocialesToString(nuevo);
+			aux = asignar_obra_String(nuevo);
 		}
 
 	}
@@ -625,27 +629,27 @@ string Verificar_Datos_Paciente(Pacientes paciente_datos_verificar) {
 		if (respuesta2 == 1) {
 			cout << "El paciente se cambio a Medicus, guardamos nueva obra social." << endl;
 			eObras_Sociales nuevo = eObras_Sociales::Medicus;
-			aux = Obras_SocialesToString(nuevo);
+			aux = asignar_obra_String(nuevo);
 		}
 		else if (respuesta2 == 2) {
 			cout << "El paciente se cambio a Italiano, guardamos nueva obra social." << endl;
 			eObras_Sociales nuevo = eObras_Sociales::Italiano;
-			aux = Obras_SocialesToString(nuevo);
+			aux = asignar_obra_String(nuevo);
 		}
 		else if (respuesta2 == 3) {
 			cout << "El paciente se cambio a Espanyol, guardamos nueva obra social." << endl;
 			eObras_Sociales nuevo = eObras_Sociales::Espanyol;
-			aux = Obras_SocialesToString(nuevo);
+			aux = asignar_obra_String(nuevo);
 		}
 		if (respuesta2 == 4) {
 			cout << "El paciente se cambio a Aleman, guardamos nueva obra social." << endl;
 			eObras_Sociales nuevo = eObras_Sociales::Aleman;
-			aux = Obras_SocialesToString(nuevo);
+			aux = asignar_obra_String(nuevo);
 		}
 		if (respuesta2 == 5) {
 			cout << "El paciente se cambio a IOSFA, guardamos nueva obra social." << endl;
 			eObras_Sociales nuevo = eObras_Sociales::IOSFA;
-			aux = Obras_SocialesToString(nuevo);
+			aux = asignar_obra_String(nuevo);
 		}
 
 	}
@@ -656,27 +660,27 @@ string Verificar_Datos_Paciente(Pacientes paciente_datos_verificar) {
 		if (respuesta2 == 1) {
 			cout << "El paciente se cambio a Medicus, guardamos nueva obra social." << endl;
 			eObras_Sociales nuevo = eObras_Sociales::Medicus;
-			aux = Obras_SocialesToString(nuevo);
+			aux = asignar_obra_String(nuevo);
 		}
 		else if (respuesta2 == 2) {
 			cout << "El paciente se cambio a OSDE, guardamos nueva obra social." << endl;
 			eObras_Sociales nuevo = eObras_Sociales::OSDE;
-			aux = Obras_SocialesToString(nuevo);
+			aux = asignar_obra_String(nuevo);
 		}
 		else if (respuesta2 == 3) {
 			cout << "El paciente se cambio a Espanyol, guardamos nueva obra social." << endl;
 			eObras_Sociales nuevo = eObras_Sociales::Espanyol;
-			aux = Obras_SocialesToString(nuevo);
+			aux = asignar_obra_String(nuevo);
 		}
 		if (respuesta2 == 4) {
 			cout << "El paciente se cambio a Aleman, guardamos nueva obra social." << endl;
 			eObras_Sociales nuevo = eObras_Sociales::Aleman;
-			aux = Obras_SocialesToString(nuevo);
+			aux = asignar_obra_String(nuevo);
 		}
 		if (respuesta2 == 5) {
 			cout << "El paciente se cambio a IOSFA, guardamos nueva obra social." << endl;
 			eObras_Sociales nuevo = eObras_Sociales::IOSFA;
-			aux = Obras_SocialesToString(nuevo);
+			aux = asignar_obra_String(nuevo);
 		}
 
 	}
@@ -687,27 +691,27 @@ string Verificar_Datos_Paciente(Pacientes paciente_datos_verificar) {
 		if (respuesta2 == 1) {
 			cout << "El paciente se cambio a Medicus, guardamos nueva obra social." << endl;
 			eObras_Sociales nuevo = eObras_Sociales::Medicus;
-			aux = Obras_SocialesToString(nuevo);
+			aux = asignar_obra_String(nuevo);
 		}
 		else if (respuesta2 == 2) {
 			cout << "El paciente se cambio a Italiano, guardamos nueva obra social." << endl;
 			eObras_Sociales nuevo = eObras_Sociales::Italiano;
-			aux = Obras_SocialesToString(nuevo);
+			aux = asignar_obra_String(nuevo);
 		}
 		else if (respuesta2 == 3) {
 			cout << "El paciente se cambio a OSDE, guardamos nueva obra social." << endl;
 			eObras_Sociales nuevo = eObras_Sociales::OSDE;
-			aux = Obras_SocialesToString(nuevo);
+			aux = asignar_obra_String(nuevo);
 		}
 		if (respuesta2 == 4) {
 			cout << "El paciente se cambio a Aleman, guardamos nueva obra social." << endl;
 			eObras_Sociales nuevo = eObras_Sociales::Aleman;
-			aux = Obras_SocialesToString(nuevo);
+			aux = asignar_obra_String(nuevo);
 		}
 		if (respuesta2 == 5) {
 			cout << "El paciente se cambio a IOSFA, guardamos nueva obra social." << endl;
 			eObras_Sociales nuevo = eObras_Sociales::IOSFA;
-			aux = Obras_SocialesToString(nuevo);
+			aux = asignar_obra_String(nuevo);
 		}
 
 	}
@@ -718,27 +722,27 @@ string Verificar_Datos_Paciente(Pacientes paciente_datos_verificar) {
 		if (respuesta2 == 1) {
 			cout << "El paciente se cambio a Medicus, guardamos nueva obra social." << endl;
 			eObras_Sociales nuevo = eObras_Sociales::Medicus;
-			aux = Obras_SocialesToString(nuevo);
+			aux = asignar_obra_String(nuevo);
 		}
 		else if (respuesta2 == 2) {
 			cout << "El paciente se cambio a Italiano, guardamos nueva obra social." << endl;
 			eObras_Sociales nuevo = eObras_Sociales::Italiano;
-			aux = Obras_SocialesToString(nuevo);
+			aux = asignar_obra_String(nuevo);
 		}
 		else if (respuesta2 == 3) {
 			cout << "El paciente se cambio a Espanyol, guardamos nueva obra social." << endl;
 			eObras_Sociales nuevo = eObras_Sociales::Espanyol;
-			aux = Obras_SocialesToString(nuevo);
+			aux = asignar_obra_String(nuevo);
 		}
 		if (respuesta2 == 4) {
 			cout << "El paciente se cambio a OSDE, guardamos nueva obra social." << endl;
 			eObras_Sociales nuevo = eObras_Sociales::OSDE;
-			aux = Obras_SocialesToString(nuevo);
+			aux = asignar_obra_String(nuevo);
 		}
 		if (respuesta2 == 5) {
 			cout << "El paciente se cambio a IOSFA, guardamos nueva obra social." << endl;
 			eObras_Sociales nuevo = eObras_Sociales::IOSFA;
-			aux = Obras_SocialesToString(nuevo);
+			aux = asignar_obra_String(nuevo);
 		}
 
 	}
@@ -750,27 +754,27 @@ string Verificar_Datos_Paciente(Pacientes paciente_datos_verificar) {
 		if (respuesta2 == 1) {
 			cout << "El paciente se cambio a Medicus, guardamos nueva obra social." << endl;
 			eObras_Sociales nuevo = eObras_Sociales::Medicus;
-			aux = Obras_SocialesToString(nuevo);
+			aux = asignar_obra_String(nuevo);
 		}
 		else if (respuesta2 == 2) {
 			cout << "El paciente se cambio a Italiano, guardamos nueva obra social." << endl;
 			eObras_Sociales nuevo = eObras_Sociales::Italiano;
-			aux = Obras_SocialesToString(nuevo);
+			aux = asignar_obra_String(nuevo);
 		}
 		else if (respuesta2 == 3) {
 			cout << "El paciente se cambio a Espanyol, guardamos nueva obra social." << endl;
 			eObras_Sociales nuevo = eObras_Sociales::Espanyol;
-			aux = Obras_SocialesToString(nuevo);
+			aux = asignar_obra_String(nuevo);
 		}
 		if (respuesta2 == 4) {
 			cout << "El paciente se cambio a Aleman, guardamos nueva obra social." << endl;
 			eObras_Sociales nuevo = eObras_Sociales::Aleman;
-			aux = Obras_SocialesToString(nuevo);
+			aux = asignar_obra_String(nuevo);
 		}
 		if (respuesta2 == 5) {
 			cout << "El paciente se cambio a OSDE, guardamos nueva obra social." << endl;
 			eObras_Sociales nuevo = eObras_Sociales::OSDE;
-			aux = Obras_SocialesToString(nuevo);
+			aux = asignar_obra_String(nuevo);
 		}
 
 	}
@@ -792,14 +796,14 @@ tm* fecha_nuevo_turno_random() {
 	tm* ltm = (tm*)malloc(sizeof(tm));
 
 	ltm->tm_year = 2023;
-	ltm->tm_mon = rand() % 11 + 1;
+	ltm->tm_mon = rand() % 12;
 	ltm->tm_mday = 0;
 
-	if (ltm->tm_mon == 4 || ltm->tm_mon == 6 || ltm->tm_mon == 9 || ltm->tm_mon == 11)
+	if (ltm->tm_mon == 3 || ltm->tm_mon == 5 || ltm->tm_mon == 8 || ltm->tm_mon == 10)
 		ltm->tm_mday = rand() % 30 + 1; //abril, junio, septiembre y noviembre
-	else if (ltm->tm_mon == 1 || ltm->tm_mon == 3 || ltm->tm_mon == 5 || ltm->tm_mon == 7 || ltm->tm_mon == 8 || ltm->tm_mon == 10 || ltm->tm_mon == 12)
+	else if (ltm->tm_mon == 0 || ltm->tm_mon == 2 || ltm->tm_mon == 4 || ltm->tm_mon == 6 || ltm->tm_mon == 7 || ltm->tm_mon == 9 || ltm->tm_mon == 11)
 		ltm->tm_mday = rand() % 31 + 1; //enero, marzo, mayo, julio, agosto, octubre y diciembre
-	else if (ltm->tm_mon == 2)//febrero
+	else if (ltm->tm_mon == 1)//febrero
 		ltm->tm_mday = rand() % 28 + 1;
 
 	int A = (14 - ltm->tm_mon) / 12;
