@@ -61,9 +61,7 @@ typedef struct Pacientes {
 }Pacientes;
 
 
-//funciones de agregar
 void agregar_pacientes(Pacientes*& lista_pac, Pacientes paciente, int* tamactual);
-
 void agregar_medicos(Medicos*& lista_med, Medicos medico, int* tamactual);
 
 void agregar_consultas(Consultas*& lista_cons, Consultas consulta, int* tamactual);
@@ -71,11 +69,8 @@ void agregar_consultas(Consultas*& lista_cons, Consultas consulta, int* tamactua
 void agregar_contactos(Contactos*& lista_cont, Contactos contacto, int* tamactual);
 
 void agregar_consultas_extra(Consultas consulta, string a1, int* contador);
-
 void agregar_pacientes_archivados(Pacientes*& lista_pac, Pacientes paciente, int* tamactual);
 
-
-//funciones para leer archivos
 Pacientes* read_archivo_pacientes(string a1, int* contador);
 
 Medicos* read_archivo_medicos(string a1, int* contador);
@@ -87,19 +82,20 @@ Contactos* read_archivo_contactos(string a1, int* contador4);
 Pacientes* read_archivo_pacientes_archivados(string a1);
 
 Pacientes* read_archivo_lista_pacientes_nueva(string a1);
-
-
 //funciones para crear archivos
 void crear_archivo_consultas_nuevas(string nombre_a1, Consultas*& lista_consultas_nuevas, int* tamactual);
 
-void crear_archivo_pacientes_archivados(string nombre_a1, Pacientes*& lista_pac_archivados, int* tamactual);
+void crear_archivo_nuevo_lista_verificados(string nombre_a1, Pacientes*& lista_pac, Consultas*& lista_cons, Contactos*& lista_contactos, int* tamactual, int* tam_consultas, int* tam_contactos);
 
 void crear_archivo_lista_pacientes_nueva(string nombre_a1, Pacientes*& lista_pac, int* tamactual);
 
-void crear_archivo_nuevo_lista_verificados(string nombre_a1, Pacientes*& lista_pac, Consultas*& lista_cons, Contactos*& lista_contactos, int* tamactual, int* tam_consultas, int* tam_contactos);
+void crear_archivo_pacientes_archivados(string nombre_a1, Pacientes*& lista_pac_archivados, int* tamactual);
 
 
-//funciones de busqueda
+tm* toInt(string cadena);
+
+Consultas* filtrar_lista_por_dni(Consultas* lista_consultas, Pacientes pac, int* tamactual, int* tam);
+
 tm* Encontrar_Consulta_Fecha(Consultas* lista_consultas_filtradas, int* tamactual);
 
 Consultas* encontrar_ultima_consulta(Consultas* lista_consultas_filtradas, int* tamactual);
@@ -110,49 +106,52 @@ Medicos* Buscar_Medico_Nuevo(Medicos* Lista_Medicos, Consultas* lista_consultas,
 
 Pacientes* Buscar_Pacientes_Archivados(Pacientes* lista_pac, Pacientes pac_archivado_a_buscar, int* tam);
 
-Contactos* buscar_contacto_emergencia(Contactos* lista_contactos, int* tam_contactos, Pacientes pac_a_llamar, Contactos* contacto_pac);
-
-Contactos* buscar_contacto_pac(Contactos* lista_contactos, int* tam_contactos, Pacientes pac_a_llamar);
-
-
-//funciones de fecha
-tm* toInt(string cadena);
-
-tm* fecha_nuevo_turno_random();
-
-string fecha_de_hoy();
-
-string fecha_turno(tm* fecha_turno);
-
-
-//funciones de verificacion
 int Verificar_Anio_Ultima_Consulta(tm* fecha_ultima_consulta);
 
 string Verificar_Datos_Paciente(Pacientes paciente_datos_verificar);
 
 int verificar_estado_paciente(Pacientes paciente_a_verificar);
 
-int verificar_anio_2(tm* fecha_ultima_consulta);
+tm* fecha_nuevo_turno_random();
 
-
-//mas funciones
-bool cambio_obra_social();
-
-Pacientes* filtrar_verificacion_pacientes(Pacientes* lista_pac, int* tam_pacientes, Consultas* lista_consultas, int* tam_consultas, Contactos* lista_contactos, int* tam_contactos, int* tam_lista_nueva_pacientes, Pacientes*& lista_pac_archivados, int* tam_lista_archivados);
-
-Consultas* filtrar_lista_por_dni(Consultas* lista_consultas, Pacientes pac, int* tamactual, int* tam);
+//funciones de verificacion
 
 void Agregar_Archivado(Pacientes* lista_pac_antigua, Pacientes* lista_archivados, int* tam_ant, int* tam_arch);
 
 Medicos* Asignar_Medico(Medicos* Lista_Medicos, Consultas* lista_cons, int* contador6, int* contador3);
 
-void Imprimir_Datos_Consulta(Consultas nueva_consulta, Pacientes lista_pac);
+Contactos* buscar_contacto_pac(Contactos* lista_contactos, int* tam_contactos, Pacientes pac_a_llamar);
 
+Contactos* buscar_contacto_emergencia(Contactos* lista_contactos, int* tam_contactos, Pacientes pac_a_llamar, Contactos* contacto_pac);
 
-//funcion de secretaria
+void crear_archivo_nuevo_lista_verificados(string nombre_a1, Pacientes*& lista_pac, Consultas*& lista_cons, Contactos*& lista_contactos, int* tamactual, int* tam_consultas, int* tam_contactos);
+
+int verificar_estado_paciente(Pacientes paciente_a_verificar);
+
+int verificar_anio_2(tm* fecha_ultima_consulta);
+
+//mas funciones
+bool cambio_obra_social();
+
+string fecha_de_hoy();
+
+string fecha_turno(tm* fecha_turno);
+
+string modificar_obra_social_paciente(Pacientes* lista_pac, Pacientes lista_pac_verificados, int* tam_pacientes);
+
+void Imprimir_Datos_Consulta_Nueva(Consultas nueva_consulta, Pacientes* pac_a_modificar, int* contador, Pacientes* lista_pac);
+
+void Imprimir_Datos_Consulta(Consultas consulta);
+
+void Imprimir_Datos_Contacto(Contactos contacto);
+
+void cambiar_estado_paciente(Pacientes* lista_pac, Pacientes lista_pac_verificados, int* tam_pacientes, string estado);
+
+void Imprimir_Datos_Paciente(Pacientes paciente, int i);
+
 void LLamado_Secretaria(Pacientes* lista_pac, int* tam_pacientes, Pacientes* lista_nueva_verificados, Consultas* lista_consultas, Contactos* lista_contactos, Medicos* lista_medicos, int* tam_pacientes_verificados, int* tam_consultas, int* tam_contactos, int* tam_medicos, Pacientes*& lista_pac_archivados, int* tam_lista_archivados);
-
-
+//funcion de secretaria
+Pacientes* filtrar_verificacion_pacientes(Pacientes* lista_pac, int* tam_pacientes, Consultas* lista_consultas, int* tam_consultas, Contactos* lista_contactos, int* tam_contactos, int* tam_lista_nueva_pacientes, Pacientes*& lista_pac_archivados, int* tam_lista_archivados);
 //funciones principales
 
 //funciona
