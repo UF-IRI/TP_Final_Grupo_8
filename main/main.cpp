@@ -57,9 +57,4 @@ int main() {
 		cout << lista3[i].dni_pac << "," << lista3[i].telefono << "," << lista3[i].celular << "," << lista3[i].direccion << "," << lista3[i].mail << endl;
 	}*/
 
-
-
-	for (int j = 0; j < 5; j++) {
-		fecha_nuevo_turno_random();
-	}
 }

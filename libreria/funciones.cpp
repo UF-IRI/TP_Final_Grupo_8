@@ -581,6 +581,7 @@ int Verificar_Anio_Ultima_Consulta(tm* fecha_ultima_consulta) {
 
 }
 
+
 string asignar_obra_String(eObras_Sociales obras_aux) {
 	string aux = "";
 	aux = Obras_SocialesToString(obras_aux);
@@ -988,7 +989,7 @@ int verificar_anio_2(tm* fecha_ultima_consulta) {
 	tm* nuevo = localtime(&t);
 	nuevo->tm_year = (aux2->tm_year) - (fecha_ultima_consulta->tm_year);
 
-	cout << "Diferencia de años: " << nuevo->tm_year << endl;
+	//cout << "Diferencia de años: " << nuevo->tm_year << endl;
 
 	if (nuevo->tm_year <= 10 && nuevo->tm_year > 0) {
 		if (nuevo->tm_year <= 10 && nuevo->tm_year > 5)
@@ -1610,10 +1611,10 @@ Pacientes* filtrar_verificacion_pacientes(Pacientes* lista_pac, int* tam_pacient
 
 	for (int i = 0; i < *tam_pacientes - 1; i++) { //recorre lista pacientes-1
 
-		cout << "Paciente nro: " << i + 1 << endl;
+		/*cout << "Paciente nro: " << i + 1 << endl;
 		cout << "Dni: " << lista_pac[i].dni << ", " << "Nombre: " << lista_pac[i].nombre << ", " << "Apellido: " << lista_pac[i].apellido << ", "
 			<< "Sexo: " << lista_pac[i].sexo << ", " << "Fecha de nacimiento: " << lista_pac[i].natalicio << ", " << "Estado paciente: " << lista_pac[i].estado
-			<< ", " << "Obra social: " << lista_pac[i].id_os << endl;
+			<< ", " << "Obra social: " << lista_pac[i].id_os << endl;*/
 
 		lista_cons = filtrar_lista_por_dni(lista_consultas, lista_pac[i], tam_consultas, &tam_lista_filtrada_consultas);
 		tm* aux3 = Encontrar_Consulta_Fecha(lista_cons, &tam_lista_filtrada_consultas);
@@ -1631,7 +1632,7 @@ Pacientes* filtrar_verificacion_pacientes(Pacientes* lista_pac, int* tam_pacient
 				agregar_pacientes(l_pac, lista_pac[i], tam_lista_nueva_pacientes);
 			}
 			else if (aux_ult_consulta->presento == true) {
-				cout << "El paciente se presento a su ultimo turno, el cual fue hace menos de 10 años." << endl;
+				//cout << "El paciente se presento a su ultimo turno, el cual fue hace menos de 10 años." << endl;
 
 				int segunda_verificacion = verificar_anio_2(aux3); //habria que ver si es menor a 5 años de actividad
 				if (segunda_verificacion == 1)//podemos llamar
@@ -1655,12 +1656,12 @@ Pacientes* filtrar_verificacion_pacientes(Pacientes* lista_pac, int* tam_pacient
 
 		}
 		else if (verificacion_anio_ultima_consulta == 0) {
-			cout << "El paciente se atendio hace mas de 10 años, es un paciente irrecuperable. Archivamos su historial. " << endl;
+			//cout << "El paciente se atendio hace mas de 10 años, es un paciente irrecuperable. Archivamos su historial. " << endl;
 			agregar_pacientes_archivados(*&lista_pac_archivados, lista_pac[i], tam_lista_archivados);
 			//archivamos
 		}
 		else if (verificacion_anio_ultima_consulta == 2) {
-			cout << "El paciente ya tiene un turno proximo. " << endl;
+			//cout << "El paciente ya tiene un turno proximo. " << endl;
 			//no agrego nada
 		}
 		tam_lista_filtrada_consultas = 0;
