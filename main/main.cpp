@@ -34,16 +34,16 @@ int main() {
 
 	crear_archivo_nuevo_lista_verificados("Pacientes_Verificados_Secretaria.csv", lista_nueva_verificados, lista1, lista3, &contador5, &contador2, &contador4);
 
-
+/*
 	for (int i = 0; i < contador - 1; i++) {
 		cout << "Paciente nro: " << i << endl;
 		cout << lista[i].dni << "," << lista[i].nombre << "," << lista[i].apellido << "," << lista[i].sexo << "," << lista[i].natalicio << "," << lista[i].estado << "," << lista[i].id_os << endl;
 
-	}
+	}*/
 
 	LLamado_Secretaria(lista, &contador, lista_nueva_verificados, lista1, lista3, lista2, &contador5, &contador2, &contador4, &contador3, lista_archivados, &contador_archivados);
 
-
+/*
 	for (int i = 0; i < contador - 1; i++) {
 		cout << "Paciente nro: " << i << endl;
 		cout << lista[i].dni << "," << lista[i].nombre << "," << lista[i].apellido << "," << lista[i].sexo << "," << lista[i].natalicio << "," << lista[i].estado << "," << lista[i].id_os << endl;
@@ -55,7 +55,7 @@ int main() {
 
 	for (int i = 0; i < contador4 - 1; i++) {
 		cout << lista3[i].dni_pac << "," << lista3[i].telefono << "," << lista3[i].celular << "," << lista3[i].direccion << "," << lista3[i].mail << endl;
-	}
+	}*/
 
 
 
